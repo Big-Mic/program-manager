@@ -15,4 +15,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ProgramManager.Application\ProgramManager.Application.csproj" />
+    <ProjectReference Include="..\ProgramManager.Domain\ProgramManager.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
