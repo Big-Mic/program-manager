@@ -9,7 +9,7 @@ namespace  ProgramManager.Application.Dtos
 {
     public class EntityDto 
     {
-        [Key]
-        public virtual Guid Id { get; set; }
+       
+        public virtual Guid? Id { get; set; }
     }
 }

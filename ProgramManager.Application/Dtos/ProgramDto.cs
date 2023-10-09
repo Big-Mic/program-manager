@@ -23,6 +23,8 @@ namespace ProgramManager.Application.Dtos
         public ProgramTypeDto Type { get; set; }
         public List<SkillDto> RequiredSkills { get; set; }
         public ApplicationDto Application { get; set; }
+        public List<StageDto> Stages { get; set; }
+
 
     }
 }

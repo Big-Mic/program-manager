@@ -10,6 +10,10 @@ namespace ProgramManager.Domain.Entities
 {
     public class Stage : Entity
     {
+        public Stage()
+        {
+            
+        }
         public Stage(short order, string title, StageType type, string videoInterviewQuestion, DurationUnit durationUnit, string description, short maxDuration, short deadline)
         {
             Order = order;

@@ -10,6 +10,6 @@ namespace  ProgramManager.Domain.Entities.Root
     public class Entity : IEntity
     {
         [Key]
-        public virtual Guid Id { get; set; }
+        public virtual Guid Id { get; set; } = Guid.NewGuid();
     }
 }

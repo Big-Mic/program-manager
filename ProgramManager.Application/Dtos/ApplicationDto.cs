@@ -16,6 +16,5 @@ namespace ProgramManager.Application.Dtos
         public List<QuestionDto> AdditionalQuestions { get; set; }
 
         public List<ProfileQuestionDto> ProfileQuestions { get; set; }
-        public List<StageDto> Stages { get; set; }
     }
 }
