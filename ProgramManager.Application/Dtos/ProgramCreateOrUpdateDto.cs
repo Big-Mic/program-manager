@@ -20,8 +20,8 @@ namespace ProgramManager.Application.Dtos
         public DateTime StartDate { get; set; }
         public DateTime ApplicationOpenDate { get; set; }
         public DateTime ApplicationCloseDate { get; set; }
-        public QualificationDto MinimumQualification { get; set; }
-        public ProgramTypeDto Type { get; set; }
+        public Guid MinimumQualificationId { get; set; }
+        public Guid TypeId { get; set; }
         public List<SkillDto> RequiredSkills { get; set; }
     }
 }

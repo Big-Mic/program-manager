@@ -9,6 +9,14 @@ namespace ProgramManager.Domain.Entities
 {
     public class ProgramType : Entity
     {
+        public ProgramType()
+        {
+            
+        }
+        public ProgramType(string title)
+        {
+            Title = title;
+        }
         public string Title { get; set; }
     }
 }

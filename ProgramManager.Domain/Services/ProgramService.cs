@@ -18,22 +18,29 @@ namespace ProgramManager.Domain.Services
         public async Task<Program> CreateProgram(string title, string description, string summary, string benefits, 
             string applicationCriteria, string duration, string location, short maximumNumberOfAppplicants, 
             DateTime startDate, DateTime applicationOpenDate, DateTime applicationCloseDate,
-           Qualification minimumQualification, ProgramType type, List<Skill> requiredSkills)
+           Guid minimumQualificationId, Guid typeId, List<Skill> requiredSkills)
         {
-           var program = new Program(title, description, summary, benefits, applicationCriteria, duration, location, maximumNumberOfAppplicants, startDate, applicationOpenDate, applicationCloseDate, minimumQualification, type, requiredSkills);
+           
+           var program = new Program(title, description, summary, benefits, applicationCriteria, duration, location, 
+               maximumNumberOfAppplicants, startDate, applicationOpenDate, applicationCloseDate, minimumQualificationId, typeId,
+               requiredSkills);
+ 
            return await _programDbContext.Save(program);
         }
 
         public async Task<Program> UpdateProgram(Guid id, string title, string description, string summary, string benefits,
             string applicationCriteria, string duration, string location, short maximumNumberOfAppplicants, 
             DateTime startDate, DateTime applicationOpenDate, DateTime applicationCloseDate,
-            Qualification minimumQualification, ProgramType type, List<Skill> requiredSkills)
+            Guid minimumQualificationId, Guid typeId, List<Skill> requiredSkills)
         {
             Program program = await _programDbContext.GetById<Program>(id);
             if (program != null)
             {
 
-                program.Update(title, description, summary, benefits, applicationCriteria, duration, location, maximumNumberOfAppplicants, startDate, applicationOpenDate, applicationCloseDate, minimumQualification, type, requiredSkills);
+                program.Update(title, description, summary, benefits, applicationCriteria, duration, location,
+                    maximumNumberOfAppplicants, startDate, applicationOpenDate, applicationCloseDate, minimumQualificationId, typeId, 
+                    requiredSkills);
+
                 return await _programDbContext.Update(program);
             }
 

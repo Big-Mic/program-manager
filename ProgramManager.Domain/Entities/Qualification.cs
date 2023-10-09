@@ -9,6 +9,14 @@ namespace ProgramManager.Domain.Entities
 {
     public class Qualification : Entity
     {
+        public Qualification()
+        {
+            
+        }
+        public Qualification(string title)
+        {
+            Title = title;
+        }
         public string Title { get; set; }
     }
 }

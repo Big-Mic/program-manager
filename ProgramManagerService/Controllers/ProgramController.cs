@@ -14,14 +14,17 @@ namespace ProgramManagerService.Controllers
         {
             _programAppService = programAppService;
         }
+        [HttpGet("{id}")]
+        public async Task<ProgramDto> GetAsync(Guid id)
+        {
+            return await _programAppService.GetProgram(id);
+        } 
         [HttpPost]
-        [Route("[controller]")]
         public async Task<ProgramDto> CreateAsync([FromBody] ProgramCreateOrUpdateDto input)
         {
             return await _programAppService.CreateProgram(input);
         } 
         [HttpPut]
-        [Route("[controller]")]
         public async Task<ProgramDto> UpdateAsync([FromBody] ProgramCreateOrUpdateDto input)
         {
             return await _programAppService.UpdateProgram(input);

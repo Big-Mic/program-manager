@@ -22,6 +22,7 @@ namespace ProgramManager.Application.Dtos
         public QualificationDto MinimumQualification { get; set; }
         public ProgramTypeDto Type { get; set; }
         public List<SkillDto> RequiredSkills { get; set; }
+        public ApplicationDto Application { get; set; }
 
     }
 }

@@ -15,5 +15,10 @@ namespace ProgramManager.Domain.Entities
         public string Title  { get; set; }
 
         public short Order { get; set; }
+        internal void Update(Question question)
+        {
+            Type = question.Type;
+            Title = question.Title;
+        }
     }
 }

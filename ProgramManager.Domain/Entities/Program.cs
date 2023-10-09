@@ -15,9 +15,10 @@ namespace ProgramManager.Domain.Entities
 
         public Program(string title, string description, string summary, string benefits, string applicationCriteria, string duration, string location, 
             short maximumNumberOfAppplicants, DateTime startDate, DateTime applicationOpenDate, DateTime applicationCloseDate, 
-            Qualification minimumQualification, ProgramType type, List<Skill> requiredSkills)
+            Guid minimumQualificationId, Guid typeId, List<Skill> requiredSkills)
         {
-            SetProperties(title, description, summary, benefits, applicationCriteria, duration, location, maximumNumberOfAppplicants, startDate, applicationOpenDate, applicationCloseDate, minimumQualification, type, requiredSkills);
+            SetProperties(title, description, summary, benefits, applicationCriteria, duration, location, maximumNumberOfAppplicants, startDate, applicationOpenDate, applicationCloseDate, minimumQualificationId, typeId, requiredSkills);
+            Application = new Application();
         }
 
         public string Title { get; set; }
@@ -31,19 +32,23 @@ namespace ProgramManager.Domain.Entities
         public DateTime StartDate { get; set; }
         public DateTime ApplicationOpenDate { get; set; }
         public DateTime ApplicationCloseDate { get; set; }
+        public Guid MinimumQualificationId { get; set; }
         public Qualification MinimumQualification { get; set; }
+        public Guid TypeId { get; set; }
         public ProgramType Type { get; set; }
         public List<Skill> RequiredSkills { get; set; }
+        public Application Application { get; private set; }
+        public List<Stage> Stages { get; set; }
 
         internal void Update(string title, string description, string summary, string benefits, string applicationCriteria, string duration, string location,
             short maximumNumberOfAppplicants, DateTime startDate, DateTime applicationOpenDate, DateTime applicationCloseDate,
-            Qualification minimumQualification, ProgramType type, List<Skill> requiredSkills)
+            Guid minimumQualificationId, Guid typeId, List<Skill> requiredSkills)
         {
-            SetProperties(title, description, summary, benefits, applicationCriteria, duration, location, maximumNumberOfAppplicants, startDate, applicationOpenDate, applicationCloseDate, minimumQualification, type, requiredSkills);
+            SetProperties(title, description, summary, benefits, applicationCriteria, duration, location, maximumNumberOfAppplicants, startDate, applicationOpenDate, applicationCloseDate, minimumQualificationId, typeId, requiredSkills);
         }
         internal void SetProperties(string title, string description, string summary, string benefits, string applicationCriteria, string duration, string location,
             short maximumNumberOfAppplicants, DateTime startDate, DateTime applicationOpenDate, DateTime applicationCloseDate,
-            Qualification minimumQualification, ProgramType type, List<Skill> requiredSkills)
+            Guid minimumQualificationId, Guid typeId, List<Skill> requiredSkills)
         {
             Title = title;
             Description = description;
@@ -56,11 +61,30 @@ namespace ProgramManager.Domain.Entities
             StartDate = startDate;
             ApplicationOpenDate = applicationOpenDate;
             ApplicationCloseDate = applicationCloseDate;
-            MinimumQualification = minimumQualification;
-            Type = type;
+            MinimumQualificationId = minimumQualificationId;
+            TypeId = typeId;
             RequiredSkills = requiredSkills;
         }
+        internal void UpdateStageList(List<Stage> stages)
+        {
+            Stages ??= new();
 
+            var submittedIdHash = stages.Select(x => x.Id);
+            Stages.RemoveAll(x => !submittedIdHash.Contains(x.Id));
+            var existingStages = Stages.ToDictionary(x => x.Id);
+            foreach (var stage in stages)
+            {
+                if (existingStages.ContainsKey(stage.Id))
+                {
+                    var existingStage = existingStages[stage.Id];
+                    existingStage.Update(stage);
+                }
+                else
+                {
+                    Stages.Add(stage);
+                }
+            }
+        }
 
     }
 }

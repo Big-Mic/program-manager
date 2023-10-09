@@ -11,5 +11,6 @@ namespace ProgramManager.Application.Interfaces
     {
         Task<ProgramDto> CreateProgram(ProgramCreateOrUpdateDto input);
         Task<ProgramDto> UpdateProgram(ProgramCreateOrUpdateDto input);
+        Task<ProgramDto> GetProgram(Guid programId);
     }
 }

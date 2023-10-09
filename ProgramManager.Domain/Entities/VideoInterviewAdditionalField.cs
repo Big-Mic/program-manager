@@ -10,6 +10,20 @@ namespace ProgramManager.Domain.Entities
 {
     public class VideoInterviewAdditionalField : Entity
     {
+        public VideoInterviewAdditionalField()
+        {
+            
+        }
+
+        public VideoInterviewAdditionalField(string videoInterviewQuestion, DurationUnit durationUnit, string description, short maxDuration, short deadline)
+        {
+            VideoInterviewQuestion = videoInterviewQuestion;
+            DurationUnit = durationUnit;
+            Description = description;
+            MaxDuration = maxDuration;
+            Deadline = deadline;
+        }
+
         public string VideoInterviewQuestion { get; set; }
         public DurationUnit DurationUnit { get; set; }
         public string Description { get; set; }

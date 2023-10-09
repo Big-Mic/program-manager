@@ -34,6 +34,9 @@ namespace ProgramManagerService
             builder.Services.AddScoped<IProgramDbContext, ProgramDbContext>();
             builder.Services.AddScoped<IProgramService, ProgramService>();
             builder.Services.AddScoped<IProgramAppService, ProgramAppService>();
+            builder.Services.AddScoped<IFileService, FileService>();
+            builder.Services.AddScoped<IApplicationAppService, ApplicationAppService>();
+            builder.Services.AddScoped<IApplicationTemplateService, ApplicationTemplateService>();
             builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
             var app = builder.Build();

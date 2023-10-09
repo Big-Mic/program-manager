@@ -21,13 +21,42 @@ namespace ProgramManager.Infrastructure
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Application>().ToContainer("Applications").HasNoDiscriminator();
-            modelBuilder.Entity<Program>().ToContainer("Programs").HasNoDiscriminator();
+            modelBuilder.HasDefaultContainer("Relationships");
+           // modelBuilder.Entity<Application>().ToContainer("Applications").HasNoDiscriminator();
+            modelBuilder.Entity<Program>(e =>
+            {
+                e.ToContainer("Programs");
+                e.HasNoDiscriminator()
+                .HasMany(h => h.RequiredSkills).WithMany();
+                e.HasOne(h => h.Type).WithMany().HasForeignKey(x => x.TypeId);
+                e.OwnsOne(h => h.Application);
+                e.OwnsMany(h => h.Stages);
+                e.HasOne(h => h.MinimumQualification).WithMany().HasForeignKey(x => x.MinimumQualificationId);
+            });
+            modelBuilder.Entity<Skill>(s =>
+            {
+                s.ToContainer("Skills").HasNoDiscriminator();
+                
+            });
+            modelBuilder.Entity<ProgramType>(t =>
+            {
+                t.ToContainer("ProgramTypes").HasNoDiscriminator();
+                t.HasData(new ProgramType("Full time"), new ProgramType("Part time"), new ProgramType("Internship"));
+            });
+            modelBuilder.Entity<Qualification>(q =>
+            {
+                q.ToContainer("Qualifications").HasNoDiscriminator();
+                q.HasData(new Qualification("High School"), new Qualification("College"), new Qualification("MSc"), new Qualification("Phd"));
+            });
         }
 
         public async Task<T> GetById<T>(Guid id) where T : Entity
         {
             return await Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<List<T>> GetByIds<T>(List<Guid> ids) where T : Entity
+        {
+            return await Set<T>().Where(x => ids.Contains(x.Id)).ToListAsync();
         }
 
         public async Task<T> Save<T>(T obj) where T : Entity
@@ -46,6 +75,9 @@ namespace ProgramManager.Infrastructure
 
         public DbSet<Application> Applications { get; set; }
         public DbSet<Program> Programs { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<ProgramType> ProgramTypes { get; set; }
+        public DbSet<Qualification> Qualifications { get; set; }
 
     }
 }
