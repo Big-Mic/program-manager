@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProgramManager.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ProgramManager.Application.Dtos
     public class ApplicationDto : EntityDto
     {
 
-        public string CoverImage { get; set; }
+        public Image CoverImage { get; set; }
 
         public List<PersonalInformationQuestionDto> PersonalInformations { get; set; }
 

@@ -12,10 +12,10 @@ namespace ProgramManager.Application.Dtos
         public string File { get; set; }
         public string FileName { get; set; }
 
-        public List<PersonalInformationQuestionDto> PersonalInformations { get; private set; }
+        public List<PersonalInformationQuestionDto> PersonalInformations { get; set; }
 
-        public List<QuestionDto> AdditionalQuestions { get; private set; }
+        public List<QuestionDto> AdditionalQuestions { get; set; }
 
-        public List<ProfileQuestionDto> ProfileQuestions { get; private set; }
+        public List<ProfileQuestionDto> ProfileQuestions { get; set; }
     }
 }

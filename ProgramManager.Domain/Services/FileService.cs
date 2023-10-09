@@ -30,7 +30,7 @@ namespace ProgramManager.Domain.Services
             {
                 fs.Write(fileData);
 
-                return new Image(fileName, filePath, file);
+                return new Image(fileName, filePath, filePath);
             }
         }
     }

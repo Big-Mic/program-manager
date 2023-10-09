@@ -19,15 +19,15 @@ namespace ProgramManager.Application
       
             CreateMap<Domain.Entities.Application, ApplicationDto>();
             CreateMap<PersonalInformationQuestion, PersonalInformationQuestionDto>().ReverseMap();
-            CreateMap<ProfileQuestion, ProfileQuestionDto>();
+            CreateMap<ProfileQuestion, ProfileQuestionDto>().ReverseMap();
             CreateMap<Program, ProgramDto>();
             CreateMap<ProgramType, ProgramTypeDto>().ReverseMap();
             CreateMap<Qualification, QualificationDto>().ReverseMap();
-            CreateMap<Question, QuestionDto>();
+            CreateMap<Question, QuestionDto>().ReverseMap();
             CreateMap<Skill, SkillDto>().ReverseMap();
-            CreateMap<Stage, StageDto>();
+            CreateMap<Stage, StageDto>().ReverseMap();
+            CreateMap<VideoInterviewAdditionalField, VideoInterviewAdditionalFieldDto>().ReverseMap();
             CreateMap<Entity, EntityDto>().ReverseMap().ForMember(m => m.Id, opt => opt.MapFrom(m => m.Id ?? Guid.NewGuid()));
-            CreateMap<VideoInterviewAdditionalField, VideoInterviewAdditionalFieldDto>();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace ProgramManager.Infrastructure
                 .HasMany(h => h.RequiredSkills).WithMany();
                 e.HasOne(h => h.Type).WithMany().HasForeignKey(x => x.TypeId);
                 e.OwnsOne(h => h.Application);
-                e.OwnsMany(h => h.Stages);
+                e.OwnsMany(h => h.Stages).OwnsOne(x => x.VideoInterviewAdditionalField);
                 e.HasOne(h => h.MinimumQualification).WithMany().HasForeignKey(x => x.MinimumQualificationId);
             });
             modelBuilder.Entity<Skill>(s =>
@@ -71,6 +71,10 @@ namespace ProgramManager.Infrastructure
             Set<T>().Update(obj);
             await SaveChangesAsync();
             return obj;
+        }
+        public async Task<DbSet<T>> GetDbSet<T>() where T : Entity
+        {
+            return Set<T>();
         }
 
         public DbSet<Application> Applications { get; set; }
