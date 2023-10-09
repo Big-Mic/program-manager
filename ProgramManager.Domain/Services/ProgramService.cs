@@ -24,7 +24,9 @@ namespace ProgramManager.Domain.Services
            var program = new Program(title, description, summary, benefits, applicationCriteria, duration, location, 
                maximumNumberOfAppplicants, startDate, applicationOpenDate, applicationCloseDate, minimumQualificationId, typeId,
                requiredSkills);
- 
+
+            program.Type = await _programDbContext.GetById<ProgramType>(typeId);
+            program.MinimumQualification = await _programDbContext.GetById<Qualification>(minimumQualificationId);
            return await _programDbContext.Save(program);
         }
 
